@@ -1,6 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import authRouter from './routes/auth.routes.js';
 import usersRouter from './routes/users.routes.js';
 import hotelsRouter from './routes/hotels.routes.js';
@@ -23,6 +25,8 @@ mongoose.connection.on('disconnected', () => {
     console.log('MongoDB disconnected!!!');
 });
 
+app.use(cors())
+app.use(cookieParser())
 app.use(express.json());
 
 app.use('/api/auth', authRouter);
